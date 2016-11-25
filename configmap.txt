@@ -1,0 +1,18 @@
+#Configmap Docs
+
+[vagrant@rhel-cdk redis-detail]$ pwd
+/home/vagrant/secret/redis/redis-detail
+[vagrant@rhel-cdk redis-detail]$ ls
+detailconfig-pod.yaml redis-config
+[vagrant@rhel-cdk redis-detail]$
+[vagrant@rhel-cdk redis-detail]$ oc create configmap big-redis-config --from-file=redis-config
+[vagrant@rhel-cdk redis-detail]$ oc get configmap
+NAME DATA AGE
+big-redis-config 1 13m
+config 1 2h
+example-redis-config 1 58m
+[vagrant@rhel-cdk redis-detail]$ oc create -f detailconfig-pod.yaml
+[vagrant@rhel-cdk redis-detail]$ oc exec -i -t bigredis redis-cli
+[vagrant@rhel-cdk redis-detail]$ oc exec -i -t bigredis /bin/bash
+root@bigredis:/data# cat /redis-master/redis.conf
+
