@@ -1,0 +1,52 @@
+##Note
+NAME OF THE CONFIGMAP= db2-config)
+
+~~~~~
+ data:
+      db2user="ronsengupta"
+      db2url="jdbc:db2://192.168.1.5/test_new_db"
+      db2passwd="mypassword"
+~~~~~
+
+The above configuration defines three  keys and three values. 
+
+https://access.redhat.com/documentation/en/openshift-container-platform/3.3/single/developer-guide/#dev-guide-configmaps
+
+In the configmap documentation of OCP, read  "Creating from Directories" and "Creating from files" section to understand more about it.
+
+
+
+
+
+Example:
+
+
+env":[
+                          {
+                            "name": "DATABASE_USERNAME",
+                            "valueFrom":{
+                               "configMapKeyRef":{
+                                     "name":"db2-config",
+                                     "key":"db2user"
+                               }
+                            }
+                          },
+                          {
+                            "name": "JDBC_SOURCE",
+                            "valueFrom":{
+                               "configMapKeyRef":{
+                                     "name":"db2-config",
+                                     "key":"db2url"
+                               }
+                            }
+                          },
+                          {
+                            "name": "DB_PASSWORD",
+                            "valueFrom":{
+                               "configMapKeyRef":{
+                                     "name":"db2-config",
+                                     "key":"db2passwd"
+                               }
+                            }
+                          }
+                       ]
