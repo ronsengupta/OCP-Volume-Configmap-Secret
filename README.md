@@ -1,15 +1,15 @@
 # OCP-Volume-Configmap-Secret
 
-[vagrant@rhel-cdk volume]$ ls
+$ ls
 pv01-claim.json pv02-claim.json volpod.yaml
-[vagrant@rhel-cdk volume]$ oc get pv
+$ oc get pv
 NAME CAPACITY ACCESSMODES STATUS CLAIM REASON AGE
 pv01 1Gi RWO,RWX Available 2d
 pv02 2Gi RWO,RWX Available 2d
 pv03 3Gi RWO,RWX Available 2d
 [vagrant@rhel-cdk volume]$ oc get pvc
-[vagrant@rhel-cdk volume]$ cat volpod.yaml (in git its renamed as vol_with_mount.yaml)
----
+$ cat volpod.yaml (in git its renamed as vol_with_mount.yaml)
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -29,7 +29,7 @@ name: pv01
 persistentVolumeClaim:
 claimName: pv01-claim
 
-[vagrant@rhel-cdk volume]$ oc create -f pv01-claim.json
+$ oc create -f pv01-claim.json
 persistentvolumeclaim "pv01-claim" created
 [vagrant@rhel-cdk volume]$ oc get pvc
 NAME STATUS VOLUME CAPACITY ACCESSMODES AGE
@@ -40,7 +40,7 @@ pv01 1Gi RWO,RWX Bound blog/pv01-claim 2d
 pv02 2Gi RWO,RWX Available 2d
 pv03 3Gi RWO,RWX Available 2d
 
-[vagrant@rhel-cdk volume]$ oc create -f volpod.yaml
+$ oc create -f volpod.yaml
 pod "volpod" created
 [vagrant@rhel-cdk volume]$ oc get pods
 NAME READY STATUS RESTARTS AGE
@@ -52,4 +52,4 @@ NAME READY STATUS RESTARTS AGE
 bigredis 1/1 Running 0 1h
 pod-with-secret 1/1 Running 0 5h
 volpod 1/1 Running 0 44s
-[vagrant@rhel-cdk volume]$
+
