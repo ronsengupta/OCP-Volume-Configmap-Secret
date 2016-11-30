@@ -1,5 +1,7 @@
 # OCP-Volume-Configmap-Secret
 
+# OCP-Volume-part1
+
 $ ls
 pv01-claim.json pv02-claim.json volpod.yaml
 $ oc get pv
@@ -8,24 +10,8 @@ pv01 1Gi RWO,RWX Available 2d
 pv02 2Gi RWO,RWX Available 2d
 pv03 3Gi RWO,RWX Available 2d
 [vagrant@rhel-cdk volume]$ oc get pvc
-$ cat volpod.yaml (in git its renamed as vol_with_mount.yaml and also the K8s format is not correct in following passage)
 
-apiVersion: v1
-kind: Pod
-metadata:
-name: volpod
-spec:
-containers:
-image: nginx
-name: volpod
-volumeMounts:
-mountPath: /mydata
-name: pv01
-volumes:
-name: pv01
-persistentVolumeClaim:
-claimName: pv01-claim
-
+# OCP-Volume-part2 
 $ oc create -f pv01-claim.json
 persistentvolumeclaim "pv01-claim" created
 [vagrant@rhel-cdk volume]$ oc get pvc
@@ -36,6 +22,8 @@ NAME CAPACITY ACCESSMODES STATUS CLAIM REASON AGE
 pv01 1Gi RWO,RWX Bound blog/pv01-claim 2d
 pv02 2Gi RWO,RWX Available 2d
 pv03 3Gi RWO,RWX Available 2d
+
+# OCP-Volume-part3
 
 $ oc create -f volpod.yaml
 pod "volpod" created
