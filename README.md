@@ -8,7 +8,7 @@ pv01 1Gi RWO,RWX Available 2d
 pv02 2Gi RWO,RWX Available 2d
 pv03 3Gi RWO,RWX Available 2d
 [vagrant@rhel-cdk volume]$ oc get pvc
-$ cat volpod.yaml (in git its renamed as vol_with_mount.yaml)
+$ cat volpod.yaml (in git its renamed as vol_with_mount.yaml and also the K8s format is not correct in following passage)
 
 apiVersion: v1
 kind: Pod
@@ -16,15 +16,12 @@ metadata:
 name: volpod
 spec:
 containers:
--
 image: nginx
 name: volpod
 volumeMounts:
--
 mountPath: /mydata
 name: pv01
 volumes:
--
 name: pv01
 persistentVolumeClaim:
 claimName: pv01-claim
